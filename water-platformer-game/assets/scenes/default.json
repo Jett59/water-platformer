@@ -1,0 +1,15 @@
+{
+    "backgroundColor": "black",
+    "foreground": [
+        "ground",
+        "doubleJump",
+        "player",
+        "platform"
+    ],
+    "listeners": [
+        "app.cleancode.camera.CameraMover",
+        "app.cleancode.player.PlayerMovement",
+        "app.cleancode.player.PlayerJump",
+        "app.cleancode.platform.PlatformCreator"
+    ]
+}

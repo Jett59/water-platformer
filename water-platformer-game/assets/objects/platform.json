@@ -1,0 +1,8 @@
+{
+    "type": "RECTANGLE",
+    "name": "platform",
+    "x": 0.4,
+    "y": 0.625,
+    "width": 0.2,
+    "height": 0.05
+}

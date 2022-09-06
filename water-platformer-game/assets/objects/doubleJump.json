@@ -1,0 +1,9 @@
+{
+    "type": "SPRITE",
+    "name": "doubleJump",
+    "spriteName": "doubleJump",
+    "x": 0.5,
+    "y": 0.5,
+    "width": 0.07,
+    "solid": false
+}
