@@ -20,7 +20,7 @@ public class PlatformCreator extends GameListener {
   
   @Override
   public void update(State state) {
-    if (player.getY() - 1 < lastPlatformHeight) {
+    while (player.getY() - 1 < lastPlatformHeight) {
       // Create the platforms for the next 1.5 screens worth.
       for (double heightOffset = 0; heightOffset < 1.5; heightOffset += 0.375) {
         double platformX = Math.random() * 0.8;

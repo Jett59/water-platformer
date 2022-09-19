@@ -1,15 +1,15 @@
 package app.cleancode.scaga.regions;
 
+import app.cleancode.scaga.shape.polygon.Polygon2D;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
-import javafx.scene.shape.Polygon;
 
 public class ImageToRegion {
   private static final int POLYGON_PRECISION = 45;
 
-  public static Polygon getRegion(Image img) {
+  public static Polygon2D getRegion(Image img) {
     var reader = img.getPixelReader();
     ObservableList<Double> polygonPoints = FXCollections.observableArrayList();
     for (double angle = 0; angle < 360; angle += 360 / POLYGON_PRECISION) {
@@ -31,6 +31,6 @@ public class ImageToRegion {
         polygonPoints.add(point.getY());
       }
     }
-    return new Polygon(polygonPoints.stream().mapToDouble(Double::doubleValue).toArray());
+    return new Polygon2D(polygonPoints.stream().mapToDouble(Double::doubleValue).toArray());
   }
 }

@@ -1,10 +1,10 @@
 {
-    "type": "SPRITE",
+    "type": "CHARACTER",
     "name": "player",
-    "spriteName": "player",
+    "characterName": "player",
     "height": 0.15,
     "x": 0.5,
     "y": 0.75,
-    "mass": 1,
+     "mass": 1,
     "drag": 8
 }

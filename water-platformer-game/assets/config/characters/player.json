@@ -1,0 +1,18 @@
+{
+    "animations": [
+        {
+            "character": "player",
+            "animation": "Idle",
+            "frames": 2,
+            "duration": "1s",
+            "height": 0.15
+        },
+        {
+            "character": "player",
+            "animation": "Run",
+            "frames": 8,
+            "duration": "24h",
+            "height": 0.15
+        }
+    ]
+}

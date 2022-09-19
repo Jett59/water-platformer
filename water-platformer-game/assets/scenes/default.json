@@ -2,6 +2,7 @@
     "backgroundColor": "black",
     "foreground": [
         "ground",
+        "water",
         "doubleJump",
         "player",
         "platform"
@@ -10,6 +11,8 @@
         "app.cleancode.camera.CameraMover",
         "app.cleancode.player.PlayerMovement",
         "app.cleancode.player.PlayerJump",
-        "app.cleancode.platform.PlatformCreator"
+        "app.cleancode.player.PlayerKiller",
+        "app.cleancode.platform.PlatformCreator",
+        "app.cleancode.water.WaterMover"
     ]
 }

@@ -49,7 +49,7 @@ public class RectangleGameObject extends GameObject<Rectangle2D> {
     }
 
     @Override
-    public void move(double newX, double newY) {
+    public void screenMove(double newX, double newY) {
         node.setX(newX);
         node.setY(newY);
     }

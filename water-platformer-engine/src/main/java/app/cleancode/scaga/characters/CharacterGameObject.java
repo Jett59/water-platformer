@@ -1,6 +1,7 @@
 package app.cleancode.scaga.characters;
 
 import app.cleancode.scaga.characters.Character.State;
+import app.cleancode.scaga.colliders.CircleCollider;
 import app.cleancode.scaga.engine.GameObject;
 import app.cleancode.scaga.engine.config.GameObjectConfig;
 import app.cleancode.scaga.engine.events.Event;
@@ -31,7 +32,7 @@ public class CharacterGameObject extends GameObject<Character> {
     @Override
     public void init() {
         node = new Character(characterName);
-        move(x, y);
+        screenMove(x, y);
     }
 
     @Override

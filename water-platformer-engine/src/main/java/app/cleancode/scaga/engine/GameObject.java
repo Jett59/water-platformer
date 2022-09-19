@@ -41,9 +41,12 @@ public abstract class GameObject<NodeType extends Node> implements Collidable {
   public double yVelocity = 0;
   public double zVelocity = 0;
 
-  public void move(double newX, double newY) {
+  public void screenMove(double newX, double newY) {
     node.setTranslateX(newX);
     node.setTranslateY(newY);
+  }
+  public void move(double x, double y) {
+      screenMove(x * screenSize.width, y * screenSize.height);
   }
 
   /**

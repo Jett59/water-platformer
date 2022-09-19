@@ -8,6 +8,7 @@ import java.util.List;
 import app.cleancode.scaga.animation.config.AnimationConfig;
 import app.cleancode.scaga.regions.ImageToRegion;
 import app.cleancode.scaga.resources.ResourceReader;
+import app.cleancode.scaga.shape.polygon.Polygon2D;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,7 +31,7 @@ public class AnimationBuilder {
         int imageHeight = (int) Math.ceil(testImage.getHeight());
         double scale = height / imageHeight;
         int cellWidth = (int) Math.ceil(testImage.getWidth() * scale);
-        List<Polygon> regions = new ArrayList<>();
+        List<Polygon2D> regions = new ArrayList<>();
         BufferedImage swingFilmStrip = new BufferedImage(cellWidth * cellCount, (int) height,
                 BufferedImage.TYPE_4BYTE_ABGR);
         Graphics graphics = swingFilmStrip.getGraphics();
@@ -55,7 +56,7 @@ public class AnimationBuilder {
                 cell = reversedImage;
                 bufferedCell = SwingFXUtils.fromFXImage(cell, null);
             }
-            Polygon imageRegion = ImageToRegion.getRegion(cell);
+            Polygon2D imageRegion = ImageToRegion.getRegion(cell);
             regions.add(imageRegion);
             graphics.drawImage(bufferedCell, cellWidth * (i - 1), 0, cellWidth, (int) height, null);
         }

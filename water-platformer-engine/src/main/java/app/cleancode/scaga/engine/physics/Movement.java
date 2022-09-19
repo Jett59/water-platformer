@@ -35,7 +35,7 @@ public class Movement extends PhysicalLaw {
         double xMoveAmount = delta / 1000000000d * obj.xVelocity * screenSize.width;
         double yMoveAmount = delta / 1000000000d * obj.yVelocity * screenSize.height;
         double origX = obj.getScreenX(), origY = obj.getScreenY();
-        obj.move(origX + xMoveAmount, origY + yMoveAmount);
+        obj.screenMove(origX + xMoveAmount, origY + yMoveAmount);
         if (obj.collidable && obj.solid) {
           Collision intersection = collider.check(obj);
           Bound intersectionBounds = intersection.intersectionRegion;
@@ -76,7 +76,7 @@ public class Movement extends PhysicalLaw {
                 obj.xVelocity = 0;
                 obj.handleEvent(new StopEvent());
               }
-              obj.move(origX + xMoveAmount, origY + yMoveAmount);
+              obj.screenMove(origX + xMoveAmount, origY + yMoveAmount);
               }
             obj.handleEvent(new CollisionEvent(intersection.other, intersectionBounds));
             if (intersection.other instanceof GameObject<?>) {
@@ -86,7 +86,7 @@ public class Movement extends PhysicalLaw {
           }
           intersection = collider.check(obj);
           if (isSolid(intersection.other) && !intersection.intersectionRegion.isEmpty()) {
-            obj.move(origX, origY);
+            obj.screenMove(origX, origY);
             }
           }
         }
