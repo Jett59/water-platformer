@@ -17,7 +17,7 @@ public class Jacket extends GameListener {
 
   @Override
   public void update(State state) {
-    if (equipped.getBoolean()) {
+    if (equipped.getBoolean() && equippedTime == 0) {
       equippedTime = System.nanoTime();
     } else if (equippedTime != 0 && equippedTime + EQUIP_DURATION < System.nanoTime()) {
       equipped.set(false);

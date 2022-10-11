@@ -10,7 +10,8 @@ import app.cleancode.scaga.engine.annotations.ImportGameObject;
 
 @AttachedTo("player")
 public class PlayerPowerUpCollector extends GameListener {
-
+private static double HELMET_MASS_MULTIPLIER = 0.5;
+  
   @ImportGameObject
   public GameObject<?> player;
 
@@ -23,6 +24,7 @@ public class PlayerPowerUpCollector extends GameListener {
       if (!helmet.getProperty("equipped").getBoolean()) {
         state.destroyGameObject(helmet);
         helmet = null;
+        player.mass *= 1d / HELMET_MASS_MULTIPLIER; // Reverses the multiplication.
       }
       helmet.move(player.getX(), player.getY());
     }
@@ -44,9 +46,12 @@ public class PlayerPowerUpCollector extends GameListener {
   public void onCollision(Collidable other, Bound collisionBound) {
     if (helmet == null && other.toString().equals("helmet")) {
       helmet = (GameObject<?>) other;
+      helmet.collidable = false;
       helmet.getProperty("equipped").set(true);
+      player.mass *= HELMET_MASS_MULTIPLIER;
     } else if (jacket == null && other.toString().equals("jacket")) {
       jacket = (GameObject<?>) other;
+      jacket.collidable = false;
       jacket.getProperty("equipped").set(true);
     }
   }
