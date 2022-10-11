@@ -14,8 +14,7 @@ public class WaterMover extends GameListener {
 
   @Override
   public void update(State state) {
-    // TODO Auto-generated method stub
-    water.yVelocity = Math.min(-0.03, water.getY() / 30);
+    water.yVelocity = Math.min(-0.03, Math.max(water.getY() / 30, -0.2));
   }
 
   @Override

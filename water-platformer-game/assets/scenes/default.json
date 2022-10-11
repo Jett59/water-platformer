@@ -5,7 +5,9 @@
         "water",
         "doubleJump",
         "player",
-        "platform"
+        "platform",
+        "helmet",
+        "jacket"
     ],
     "listeners": [
         "app.cleancode.camera.CameraMover",
@@ -13,6 +15,9 @@
         "app.cleancode.player.PlayerJump",
         "app.cleancode.player.PlayerKiller",
         "app.cleancode.platform.PlatformCreator",
-        "app.cleancode.water.WaterMover"
+        "app.cleancode.water.WaterMover",
+        "app.cleancode.powerUp.Helmet",
+        "app.cleancode.powerUp.Jacket",
+        "app.cleancode.player.PlayerPowerUpCollector"
     ]
 }

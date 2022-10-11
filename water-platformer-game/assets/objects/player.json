@@ -2,9 +2,9 @@
     "type": "CHARACTER",
     "name": "player",
     "characterName": "player",
-    "height": 0.15,
+    "width": 0.1,
     "x": 0.5,
     "y": 0.75,
      "mass": 1,
-    "drag": 8
+    "drag": 15
 }

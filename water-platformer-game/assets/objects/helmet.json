@@ -1,0 +1,12 @@
+{
+    "type": "SPRITE",
+    "name": "helmet",
+    "spriteName": "helmet",
+    "x": 0.5,
+    "y": 0.5,
+    "solid": false,
+    "width": 0.05,
+    "properties": [
+        "equipped"
+    ]
+}

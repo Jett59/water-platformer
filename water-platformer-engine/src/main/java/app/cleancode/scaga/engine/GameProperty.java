@@ -14,39 +14,39 @@ public class GameProperty {
     }
 
     public boolean getBoolean() {
-        return get();
+        return value != null ? get() : false;
     }
 
     public byte getByte() {
-        return get();
+        return value != null ? get() : 0;
     }
 
     public char getChar() {
-        return get();
+      return value != null ? get() : '\0';
     }
 
     public double getDouble() {
-        return get();
+      return value != null ? get() : 0;
     }
 
     public float getFloat() {
-        return get();
+      return value != null ? get() : 0;
     }
 
     public int getInt() {
-        return get();
+      return value != null ? get() : 0;
     }
 
     public long getLong() {
-        return get();
+      return value != null ? get() : 0;
     }
 
     public short getShort() {
-        return get();
+      return value != null ? get() : 0;
     }
 
     public String getString() {
-        return get();
+      return get();
     }
 
     public String toString() {
@@ -54,7 +54,6 @@ public class GameProperty {
     }
 
     public GameProperty(GameObject<?> owner) {
-        System.out.println("Created game property");
         this.owner = owner;
     }
 }

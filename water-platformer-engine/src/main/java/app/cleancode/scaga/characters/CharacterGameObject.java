@@ -7,6 +7,10 @@ import app.cleancode.scaga.engine.config.GameObjectConfig;
 import app.cleancode.scaga.engine.events.Event;
 import app.cleancode.scaga.engine.events.MovementEvent;
 import app.cleancode.scaga.shape.polygon.Polygon2D;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.PointLight;
+import javafx.scene.paint.Color;
 
 public class CharacterGameObject extends GameObject<Character> {
     private final String name;
@@ -31,7 +35,7 @@ public class CharacterGameObject extends GameObject<Character> {
 
     @Override
     public void init() {
-        node = new Character(characterName);
+      node = new Character(characterName);
         screenMove(x, y);
     }
 

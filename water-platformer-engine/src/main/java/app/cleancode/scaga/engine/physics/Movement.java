@@ -3,6 +3,7 @@ package app.cleancode.scaga.engine.physics;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import app.cleancode.scaga.bounds.Bound;
@@ -32,68 +33,78 @@ public class Movement extends PhysicalLaw {
         long lastMovementTime = lastMovementTimes.get(obj);
         long currentTime = System.nanoTime();
         long delta = currentTime - lastMovementTime;
-        double xMoveAmount = delta / 1000000000d * obj.xVelocity * screenSize.width;
-        double yMoveAmount = delta / 1000000000d * obj.yVelocity * screenSize.height;
-        double origX = obj.getScreenX(), origY = obj.getScreenY();
-        obj.screenMove(origX + xMoveAmount, origY + yMoveAmount);
-        if (obj.collidable && obj.solid) {
-          Collision intersection = collider.check(obj);
-          Bound intersectionBounds = intersection.intersectionRegion;
-          if (!intersectionBounds.isEmpty()) {
-            for (int i = 0; i < 4
-                && !(intersectionBounds = (intersection = collider.check(obj)).intersectionRegion)
-                    .isEmpty(); i++) {
-              if (isSolid(intersection.other)) {
-              if (intersectionBounds.getWidth() > intersectionBounds.getHeight()) {
-                if (yMoveAmount < 0) {
-                  yMoveAmount += intersectionBounds.getHeight();
-                } else if (yMoveAmount > 0) {
-                  yMoveAmount -= intersectionBounds.getHeight();
-                  obj.isTouchingGround = true;
-                } else {
-                  if (intersectionBounds.getCenterY() < obj.getRegion().getTransformedBound()
-                      .getCenterY()) {
-                    yMoveAmount = intersectionBounds.getHeight() * -1;
-                    obj.isTouchingGround = true;
-                  } else {
-                    yMoveAmount = intersectionBounds.getHeight();
-                  }
+        double originalXMoveAmount = delta / 1000000000d * obj.xVelocity * screenSize.width;
+        double originalYMoveAmount = delta / 1000000000d * obj.yVelocity * screenSize.height;
+        double originalX = obj.getScreenX(), originalY = obj.getScreenY();
+        obj.screenMove(originalX + originalXMoveAmount, originalY + originalYMoveAmount);
+        if (obj.collidable && isSolid(obj)) {
+          List<Collision> collisions = collider.check(obj);
+          double xMoveAmount = originalXMoveAmount, yMoveAmount = originalYMoveAmount;
+          Bound objBound = obj.getRegion().getTransformedBound();
+          double objCenterX = objBound.getCenterX();
+          double objCenterY = objBound.getCenterY();
+          for (Collision collision : collisions) {
+            Bound collisionBound = collision.intersectionRegion;
+            if (isSolid(collision.other)) {
+              double xMoveAmountChange = 0;
+              double yMoveAmountChange = 0;
+              double collisionCenterX = collisionBound.getCenterX();
+              double collisionCenterY = collisionBound.getCenterY();
+              // I can' think of a better way of figuring this out right now so this will have to do.
+              boolean isXIntersection = collisionBound.getWidth() < collisionBound.getHeight();
+              boolean isYIntersection = !isXIntersection;
+              if (isXIntersection) {
+                if (objCenterX > collisionCenterX && originalXMoveAmount < 0) {
+                  xMoveAmountChange = collisionBound.getWidth();
+                } else if (objCenterX < collisionCenterX && originalXMoveAmount > 0) {
+                  xMoveAmountChange = -collisionBound.getWidth();
                 }
-                obj.yVelocity = 0;
-              } else {
-                if (xMoveAmount < 0) {
-                  xMoveAmount += intersectionBounds.getWidth();
-                } else if (xMoveAmount > 0) {
-                  xMoveAmount -= intersectionBounds.getWidth();
-                } else {
-                  if (intersectionBounds.getCenterX() < obj.getRegion().getTransformedBound()
-                      .getCenterX()) {
-                    xMoveAmount = intersectionBounds.getWidth() * -1;
-                  } else {
-                    xMoveAmount = intersectionBounds.getWidth();
-                  }
+              }
+              if (isYIntersection   ) {
+                if (objCenterY > collisionCenterY && originalYMoveAmount < 0) {
+                  yMoveAmountChange = collisionBound.getHeight();
+                } else if (objCenterY < collisionCenterY && originalYMoveAmount > 0) {
+                  yMoveAmountChange = -collisionBound.getHeight();
                 }
-                obj.xVelocity = 0;
+              }
+              if (xMoveAmountChange != 0) {
                 obj.handleEvent(new StopEvent());
+                obj.xVelocity = 0;
               }
-              obj.screenMove(origX + xMoveAmount, origY + yMoveAmount);
+              if (yMoveAmountChange != 0) {
+                obj.yVelocity = 0;
+                if (yMoveAmountChange < 0) {
+                  obj.isTouchingGround = true;
+                }
               }
-            obj.handleEvent(new CollisionEvent(intersection.other, intersectionBounds));
-            if (intersection.other instanceof GameObject<?>) {
-              ((GameObject<?>) intersection.other)
-                  .handleEvent(new CollisionEvent(obj, intersectionBounds));
+              double oldXMoveAmountChange = xMoveAmount - originalXMoveAmount;
+              double oldYMoveAmountChange = yMoveAmount - originalYMoveAmount;
+              System.out.println(obj.getName());
+              System.out.printf("yMoveAmount: %.3f, oldYChange: %.3f, newYChange: %.3f\n", originalYMoveAmount, oldYMoveAmountChange, yMoveAmountChange);
+              // If the move amount is negative, get the number which is greatest out of the two,
+              // otherwise the number which is less.
+              if (originalXMoveAmount < 0 && oldXMoveAmountChange < xMoveAmountChange) {
+                xMoveAmount += xMoveAmountChange;
+              } else if (originalXMoveAmount > 0 && oldXMoveAmountChange > xMoveAmountChange) {
+                xMoveAmount += xMoveAmountChange;
+              }
+              if (originalYMoveAmount < 0 && oldYMoveAmountChange < yMoveAmountChange) {
+                yMoveAmount += yMoveAmountChange;
+              } else if (originalYMoveAmount > 0 && oldYMoveAmountChange > yMoveAmountChange) {
+                yMoveAmount += yMoveAmountChange;
+              }
+              System.out.println(yMoveAmount);
             }
+            obj.handleEvent(new CollisionEvent(collision.other, collisionBound));
           }
-          intersection = collider.check(obj);
-          if (isSolid(intersection.other) && !intersection.intersectionRegion.isEmpty()) {
-            obj.screenMove(origX, origY);
-            }
-          }
+          obj.screenMove(originalX + xMoveAmount, originalY + yMoveAmount);
         }
       }
     }
-    lastMovementTimes.put(obj,System.nanoTime());
-    if (obj.collidable){
+    lastMovementTimes.put(obj, System.nanoTime());
+    if (obj.collidable)
+
+    {
       collider.registerObject(obj);
     }
   }
