@@ -21,7 +21,7 @@ public class Collisions {
   public List<Collision> check(GameObject<?> obj) {
     List<Collision> collisions = new ArrayList<>();
     for (Collidable object : objects) {
-      if (!object.equals(obj)) {
+      if (isCollidable(object) && !object.equals(obj)) {
         Polygon2D objRegion = obj.getRegion();
         Polygon2D objectRegion = object.getRegion();
         Shape intersection = PolygonCollider.intersect(objRegion, objectRegion);
@@ -45,6 +45,10 @@ public class Collisions {
 
   public void removeCollidable(Collidable collidable) {
     objects.remove(collidable);
+  }
+
+  private boolean isCollidable(Collidable object) {
+    return !(object instanceof GameObject<?>) || ((GameObject<?>) object).collidable;
   }
 
 }

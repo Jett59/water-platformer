@@ -4,9 +4,11 @@ import app.cleancode.scaga.bounds.Bound;
 import app.cleancode.scaga.collisions.Collidable;
 import app.cleancode.scaga.engine.GameListener;
 import app.cleancode.scaga.engine.GameObject;
+import app.cleancode.scaga.engine.GameProperty;
 import app.cleancode.scaga.engine.State;
 import app.cleancode.scaga.engine.annotations.AttachedTo;
 import app.cleancode.scaga.engine.annotations.ImportGameObject;
+import app.cleancode.scaga.engine.annotations.ImportGameProperty;
 
 @AttachedTo("player")
 public class PlayerKiller extends GameListener {
@@ -18,12 +20,15 @@ public class PlayerKiller extends GameListener {
   @ImportGameObject
   public GameObject<?> water;
 
+  @ImportGameProperty(owner="player")
+  public GameProperty isWearingJacket;
+  
   private boolean dead = false;
   private long deadTime = 0;
   
   @Override
   public void update(State state) {
-    if (dead && (deadTime + DEATH_DURATION) >= System.nanoTime()) {
+    if (dead && (deadTime + DEATH_DURATION) <= System.nanoTime()) {
       water.move(0, 1);
       water.yVelocity = 0;
       player.move(0.5, 0.75);
@@ -36,15 +41,18 @@ public class PlayerKiller extends GameListener {
 
   @Override
   public void startup(State state) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void onCollision(Collidable other, Bound collisionBound) {
-    if (other.toString().equals("water")) {
+    if (other.toString().equals("water") && !dead) {
+      if (!isWearingJacket.getBoolean()) {
       dead = true;
       deadTime = System.nanoTime();
+      }else {
+        player.yVelocity = -PlayerJump.JUMP_VELOCITY;
+      }
     }
   }
   

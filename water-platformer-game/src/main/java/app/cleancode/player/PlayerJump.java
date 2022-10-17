@@ -12,7 +12,7 @@ import app.cleancode.scaga.engine.keyboard.Key;
 
 @AttachedTo("player")
 public class PlayerJump extends GameListener {
-  private static final double JUMP_VELOCITY = 1;
+  public static final double JUMP_VELOCITY = 1;
 
   @ImportGameObject
   public GameObject<?> player;

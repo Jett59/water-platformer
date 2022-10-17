@@ -1,5 +1,7 @@
 package app.cleancode.scaga.engine;
 
+import java.util.Objects;
+
 public class GameProperty {
     private Object value;
     public final GameObject<?> owner;
@@ -11,6 +13,8 @@ public class GameProperty {
 
     public void set(Object value) {
         this.value = value;
+        System.out.println("Game property owned by " + owner + ": " + value);
+        System.out.println(new Exception().getStackTrace()[1]);
     }
 
     public boolean getBoolean() {
@@ -50,7 +54,7 @@ public class GameProperty {
     }
 
     public String toString() {
-        return value.toString();
+        return Objects.toString(value);
     }
 
     public GameProperty(GameObject<?> owner) {

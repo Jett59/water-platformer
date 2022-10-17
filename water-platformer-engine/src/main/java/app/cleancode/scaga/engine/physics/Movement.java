@@ -79,8 +79,6 @@ public class Movement extends PhysicalLaw {
               }
               double oldXMoveAmountChange = xMoveAmount - originalXMoveAmount;
               double oldYMoveAmountChange = yMoveAmount - originalYMoveAmount;
-              System.out.println(obj.getName());
-              System.out.printf("yMoveAmount: %.3f, oldYChange: %.3f, newYChange: %.3f\n", originalYMoveAmount, oldYMoveAmountChange, yMoveAmountChange);
               // If the move amount is negative, get the number which is greatest out of the two,
               // otherwise the number which is less.
               if (originalXMoveAmount < 0 && oldXMoveAmountChange < xMoveAmountChange) {
@@ -93,7 +91,6 @@ public class Movement extends PhysicalLaw {
               } else if (originalYMoveAmount > 0 && oldYMoveAmountChange > yMoveAmountChange) {
                 yMoveAmount += yMoveAmountChange;
               }
-              System.out.println(yMoveAmount);
             }
             obj.handleEvent(new CollisionEvent(collision.other, collisionBound));
           }

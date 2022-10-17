@@ -6,8 +6,8 @@ import app.cleancode.scaga.engine.State;
 import app.cleancode.scaga.engine.annotations.ImportGameObject;
 
 public class PlatformCreator extends GameListener {
-private static double HELMET_CHANCE = 0.5;
-private static double JACKET_CHANCE = 0.5;
+private static double HELMET_CHANCE = 0.1;
+private static double JACKET_CHANCE = 0.35;
   
   @ImportGameObject
   public GameObject<?> platform;
