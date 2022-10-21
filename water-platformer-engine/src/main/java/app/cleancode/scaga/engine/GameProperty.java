@@ -13,8 +13,6 @@ public class GameProperty {
 
     public void set(Object value) {
         this.value = value;
-        System.out.println("Game property owned by " + owner + ": " + value);
-        System.out.println(new Exception().getStackTrace()[1]);
     }
 
     public boolean getBoolean() {

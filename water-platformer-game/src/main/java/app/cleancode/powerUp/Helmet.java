@@ -8,7 +8,7 @@ import app.cleancode.scaga.engine.annotations.ImportGameProperty;
 
 @AttachedTo("helmet")
 public class Helmet extends GameListener {
-  private static long EQUIP_DURATION = 30000000000l;
+  private static long EQUIP_DURATION = 45000000000l;
 
   @ImportGameProperty(owner = "helmet")
   public GameProperty equipped;

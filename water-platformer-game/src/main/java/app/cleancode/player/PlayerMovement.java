@@ -1,5 +1,6 @@
 package app.cleancode.player;
 
+import app.cleancode.scaga.bounds.Bound;
 import app.cleancode.scaga.engine.GameListener;
 import app.cleancode.scaga.engine.GameObject;
 import app.cleancode.scaga.engine.State;
@@ -23,6 +24,12 @@ public class PlayerMovement extends GameListener {
     }else if (state.keyState.isKeyDown(Key.RIGHT)) {
       player.xVelocity = SPEED;
       player.handleEvent(new MovementEvent(1, SPEED));
+    }
+    Bound playerBound = player.getRegion().getTransformedBound();
+    if (playerBound.getMaxX() < 0) {
+      player.screenMove(state.getScreenWidth() + playerBound.getMaxX(), playerBound.getMinY());
+    }if (playerBound.getMinX() > state.getScreenWidth()) {
+      player.screenMove(playerBound.getMinX() - state.getScreenWidth(), playerBound.getMinY());
     }
   }
 

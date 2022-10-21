@@ -41,12 +41,16 @@ public abstract class GameObject<NodeType extends Node> implements Collidable {
   public double yVelocity = 0;
   public double zVelocity = 0;
 
+  private List<GameObject<?>> attachedObjects = new ArrayList<>();
+
   public void screenMove(double newX, double newY) {
     node.setTranslateX(newX);
     node.setTranslateY(newY);
+    attachedObjects.forEach(object -> object.screenMove(newX, newY));
   }
+
   public void move(double x, double y) {
-      screenMove(x * screenSize.width, y * screenSize.height);
+    screenMove(x * screenSize.width, y * screenSize.height);
   }
 
   /**
@@ -83,6 +87,13 @@ public abstract class GameObject<NodeType extends Node> implements Collidable {
    */
   public double getY() {
     return getScreenY() / screenSize.height;
+  }
+
+  public void attachObject(GameObject<?> object) {
+    attachedObjects.add(object);
+  }
+  public void detachObject(GameObject<?> object) {
+    attachedObjects.remove(object);
   }
 
   public abstract void init();

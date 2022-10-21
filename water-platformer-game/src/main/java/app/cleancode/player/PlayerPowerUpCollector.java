@@ -12,34 +12,33 @@ import app.cleancode.scaga.engine.annotations.ImportGameProperty;
 
 @AttachedTo("player")
 public class PlayerPowerUpCollector extends GameListener {
-private static double HELMET_MASS_MULTIPLIER = 0.5;
-  
+  private static double HELMET_MASS_MULTIPLIER = 0.5;
+
   @ImportGameObject
   public GameObject<?> player;
 
-  @ImportGameProperty(owner="player")
+  @ImportGameProperty(owner = "player")
   public GameProperty isWearingJacket;
-  
+
   private GameObject<?> helmet;
   private GameObject<?> jacket;
 
   @Override
   public void update(State state) {
     if (helmet != null) {
-      helmet.move(player.getX(), player.getY());
       if (!helmet.getProperty("equipped").getBoolean()) {
         state.destroyGameObject(helmet);
+        player.detachObject(helmet);
         helmet = null;
         player.mass *= 1d / HELMET_MASS_MULTIPLIER; // Reverses the multiplication.
       }
     }
     if (jacket != null) {
-      jacket.move(player.getX(), player.getY());
       if (!jacket.getProperty("equipped").getBoolean()) {
         state.destroyGameObject(jacket);
+        player.detachObject(jacket);
         jacket = null;
         isWearingJacket.set(false);
-        System.out.println("Not wearing jacket " + isWearingJacket);
       }
     }
   }
@@ -56,11 +55,13 @@ private static double HELMET_MASS_MULTIPLIER = 0.5;
       helmet.collidable = false;
       helmet.getProperty("equipped").set(true);
       player.mass *= HELMET_MASS_MULTIPLIER;
+      player.attachObject(helmet);
     } else if (jacket == null && other.toString().equals("jacket")) {
       jacket = (GameObject<?>) other;
       jacket.collidable = false;
       jacket.getProperty("equipped").set(true);
       isWearingJacket.set(true);
+      player.attachObject(jacket);
     }
   }
 

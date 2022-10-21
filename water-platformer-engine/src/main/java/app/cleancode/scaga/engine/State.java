@@ -74,4 +74,11 @@ public class State {
     public void setCameraY(double y) {
       scene.camera.setTranslateY(y);
     }
+    
+    public double getScreenWidth() {
+      return screenSize.width;
+    }
+    public double getScreenHeight() {
+      return screenSize.height;
+    }
 }
