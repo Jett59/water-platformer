@@ -4,5 +4,9 @@
     "x": 0.4,
     "y": 0.625,
     "width": 0.2,
-    "height": 0.05
+    "height": 0.05,
+    "properties": [
+        "shouldHaveHelmet",
+        "shouldHaveJacket"
+    ]
 }

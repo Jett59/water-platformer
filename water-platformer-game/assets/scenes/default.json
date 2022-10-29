@@ -18,6 +18,7 @@
         "app.cleancode.water.WaterMover",
         "app.cleancode.powerUp.Helmet",
         "app.cleancode.powerUp.Jacket",
-        "app.cleancode.player.PlayerPowerUpCollector"
+        "app.cleancode.player.PlayerPowerUpCollector",
+        "app.cleancode.platform.PlatformPowerUpCreator"
     ]
 }

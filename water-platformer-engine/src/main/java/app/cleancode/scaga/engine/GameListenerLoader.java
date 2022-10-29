@@ -50,7 +50,7 @@ public class GameListenerLoader {
     }
 
     private String getObjectName(Field field) throws Exception {
-        String annotationParam = field.getDeclaredAnnotation(ImportGameObject.class).bvalue();
+        String annotationParam = field.getDeclaredAnnotation(ImportGameObject.class).value();
         return annotationParam.isEmpty() ? field.getName() : annotationParam;
     }
 }

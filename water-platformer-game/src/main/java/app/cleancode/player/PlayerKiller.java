@@ -22,6 +22,9 @@ public class PlayerKiller extends GameListener {
 
   @ImportGameProperty(owner="player")
   public GameProperty isWearingJacket;
+
+  @ImportGameProperty(owner="player")
+  public GameProperty isDead;
   
   private boolean dead = false;
   private long deadTime = 0;
@@ -29,13 +32,18 @@ public class PlayerKiller extends GameListener {
   @Override
   public void update(State state) {
     if (dead && (deadTime + DEATH_DURATION) <= System.nanoTime()) {
-      water.move(0, 1);
+      water.move(0, 1.5);
       water.yVelocity = 0;
       player.move(0.5, 0.75);
       dead = false;
+      // Set isDead to true for a frame to allow the game to rebuild itself.
+      isDead.set(true);
     }else if (dead) {
       player.yVelocity = 0;
       player.xVelocity = 0;
+    }else {
+      // Not dead.
+      isDead.set(false);
     }
   }
 

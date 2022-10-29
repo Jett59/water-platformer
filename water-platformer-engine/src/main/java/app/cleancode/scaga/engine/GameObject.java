@@ -22,6 +22,8 @@ public abstract class GameObject<NodeType extends Node> implements Collidable {
   public boolean isTouchingGround = false;
   public boolean collidable;
   public boolean solid;
+  
+  public boolean destroyed;
 
   protected List<GameListener> attachedListeners = new ArrayList<>();
 

@@ -8,6 +8,7 @@
     "mass": 1,
     "drag": 15,
     "properties": [
-        "isWearingJacket"
+        "isWearingJacket",
+        "isDead"
     ]
 }

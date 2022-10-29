@@ -8,5 +8,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ImportGameObject {
-    public String bvalue() default "";
+    public String value() default "";
 }

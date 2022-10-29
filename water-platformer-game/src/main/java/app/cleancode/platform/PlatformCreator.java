@@ -6,9 +6,7 @@ import app.cleancode.scaga.engine.State;
 import app.cleancode.scaga.engine.annotations.ImportGameObject;
 
 public class PlatformCreator extends GameListener {
-private static double HELMET_CHANCE = 0.1;
-private static double JACKET_CHANCE = 0.35;
-  
+
   @ImportGameObject
   public GameObject<?> platform;
 
@@ -35,11 +33,6 @@ private static double JACKET_CHANCE = 0.35;
         double doubleJumpX = Math.random() * 0.93;
         state.createGameObject(platform, platformX, lastPlatformHeight - heightOffset);
         state.createGameObject(doubleJump, doubleJumpX, lastPlatformHeight - heightOffset - 0.1);
-        if (Math.random() < HELMET_CHANCE) {
-          state.createGameObject(helmet, platformX, lastPlatformHeight - heightOffset - 0.1);
-        }else if (Math.random() < JACKET_CHANCE) {
-          state.createGameObject(jacket, platformX, lastPlatformHeight - heightOffset - 0.1);
-        }
       }
       lastPlatformHeight -= 1.5;
     }
@@ -51,6 +44,10 @@ private static double JACKET_CHANCE = 0.35;
     state.destroyGameObject(doubleJump);
     state.destroyGameObject(helmet);
     state.destroyGameObject(jacket);
+    // Give the helmet and jacket templates to the power up creator so they can be used from there
+    // (it can't get them for itself because it is only instanciated after they are deleted).
+    PlatformPowerUpCreator.helmetTemplate = helmet;
+    PlatformPowerUpCreator.jacketTemplate = jacket;
   }
 
 }

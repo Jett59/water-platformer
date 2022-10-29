@@ -22,9 +22,24 @@ public class PlayerPowerUpCollector extends GameListener {
 
   private GameObject<?> helmet;
   private GameObject<?> jacket;
+  @ImportGameProperty(owner = "player")
+  public GameProperty isDead;
 
   @Override
   public void update(State state) {
+    if (isDead.getBoolean()) {
+      if (helmet != null) {
+        state.destroyGameObject(helmet);
+        player.detachObject(helmet);
+        helmet = null;
+        player.mass *= 1d / HELMET_MASS_MULTIPLIER; // Reverses the multiplication.
+      }
+      if (jacket != null) {
+        state.destroyGameObject(jacket);
+        player.detachObject(jacket);
+        jacket = null;
+      }
+    }
     if (helmet != null) {
       if (!helmet.getProperty("equipped").getBoolean()) {
         state.destroyGameObject(helmet);
