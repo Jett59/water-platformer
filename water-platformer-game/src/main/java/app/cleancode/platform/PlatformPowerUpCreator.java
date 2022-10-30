@@ -10,8 +10,8 @@ import app.cleancode.scaga.engine.annotations.ImportGameProperty;
 
 @AttachedTo("platform")
 public class PlatformPowerUpCreator extends GameListener {
-  private static double HELMET_CHANCE = 0.5;
-  private static double JACKET_CHANCE = 0.5;
+  private static double HELMET_CHANCE = 0.03;
+  private static double JACKET_CHANCE = 0.05;
 
   // We can't import the templates in the traditional way because they are destroyed before we get a
   // chance to run, but the PlatformCreator does have access to them so we define these global
