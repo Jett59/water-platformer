@@ -7,7 +7,6 @@ import app.cleancode.scaga.engine.GameObject;
 import app.cleancode.scaga.engine.State;
 import app.cleancode.scaga.engine.annotations.AttachedTo;
 import app.cleancode.scaga.engine.annotations.ImportGameObject;
-import app.cleancode.scaga.engine.annotations.ImportGameProperty;
 import app.cleancode.scaga.engine.keyboard.Key;
 
 @AttachedTo("player")

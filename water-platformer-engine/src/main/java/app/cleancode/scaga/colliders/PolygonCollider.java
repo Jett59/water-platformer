@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 
 import app.cleancode.scaga.shape.polygon.Polygon2D;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class PolygonCollider {

@@ -10,12 +10,8 @@ import app.cleancode.scaga.regions.ImageToRegion;
 import app.cleancode.scaga.resources.ResourceReader;
 import app.cleancode.scaga.shape.polygon.Polygon2D;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.PointLight;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 public class SpriteGameObject extends GameObject<ImageView> {
   private static final String PATH_FORMAT = "/sprites/%s.png";

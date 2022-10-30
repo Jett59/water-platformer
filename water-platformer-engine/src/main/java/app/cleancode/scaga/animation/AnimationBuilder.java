@@ -13,7 +13,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 
 public class AnimationBuilder {

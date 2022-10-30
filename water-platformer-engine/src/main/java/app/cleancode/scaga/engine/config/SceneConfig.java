@@ -1,7 +1,5 @@
 package app.cleancode.scaga.engine.config;
 
-import javafx.scene.paint.Color;
-
 public class SceneConfig {
     private String[] listeners;
     private String[] foreground;
