@@ -2,7 +2,7 @@
     "type": "CHARACTER",
     "name": "player",
     "characterName": "player",
-    "width": 0.1,
+    "width": 0.05,
     "x": 0.5,
     "y": 0.75,
     "mass": 1,
