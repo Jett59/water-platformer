@@ -4,3 +4,6 @@
 #water {
     -fx-fill: blue;
 }
+#distanceText {
+    -fx-fill: white;
+}

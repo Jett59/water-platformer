@@ -7,7 +7,8 @@
         "player",
         "platform",
         "helmet",
-        "jacket"
+        "jacket",
+        "distanceText"
     ],
     "listeners": [
         "app.cleancode.camera.CameraMover",
@@ -19,6 +20,7 @@
         "app.cleancode.powerUp.Helmet",
         "app.cleancode.powerUp.Jacket",
         "app.cleancode.player.PlayerPowerUpCollector",
-        "app.cleancode.platform.PlatformPowerUpCreator"
+        "app.cleancode.platform.PlatformPowerUpCreator",
+        "app.cleancode.distanceText.DistanceTextUpdater"
     ]
 }

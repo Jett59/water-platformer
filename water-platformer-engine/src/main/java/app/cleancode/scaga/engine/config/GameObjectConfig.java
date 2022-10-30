@@ -7,6 +7,7 @@ public class GameObjectConfig {
     private String characterName;
     private String spriteName;
     private String soundName;
+    private String text;
     private String[] properties;
     private boolean collidable = true;
     private boolean solid = true;
@@ -132,6 +133,14 @@ public class GameObjectConfig {
 
     public void setSolid(boolean solid) {
       this.solid = solid;
+    }
+
+    public String getText() {
+      return text;
+    }
+
+    public void setText(String text) {
+      this.text = text;
     }
 
 }
