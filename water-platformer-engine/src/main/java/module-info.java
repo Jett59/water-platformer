@@ -1,4 +1,4 @@
-module app.cleancode.scaga {
+module app.cleancode.waterPlatformerEngine {
     exports app.cleancode.scaga;
     exports app.cleancode.scaga.engine;
     exports app.cleancode.scaga.engine.events;

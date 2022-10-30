@@ -1,4 +1,6 @@
 open module app.cleancode.waterPlatformer {
-  requires app.cleancode.scaga;
+  exports app.cleancode;
+
+  requires app.cleancode.waterPlatformerEngine;
   requires java.desktop;
 }
