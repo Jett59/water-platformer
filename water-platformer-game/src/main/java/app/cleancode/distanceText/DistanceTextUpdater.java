@@ -19,18 +19,18 @@ public class DistanceTextUpdater extends GameListener {
   @ImportGameObject
   public GameObject<?> player;
 
-  private double initialPlayerYDelta;
+  private double initialCameraYDelta;
 
   @Override
   public void update(State state) {
     distanceText.handleEvent(
         new TextChangeEvent("Distance: %.3f".formatted(Math.abs(player.getY() - water.getY()))));
-    distanceText.move(distanceText.getX(), initialPlayerYDelta + player.getY());
+    distanceText.screenMove(distanceText.getScreenX(), initialCameraYDelta + state.getCameraY());
   }
 
   @Override
   public void startup(State state) {
-    initialPlayerYDelta = distanceText.getY() - player.getY();
+    initialCameraYDelta = distanceText.getScreenY();
   }
 
 }
