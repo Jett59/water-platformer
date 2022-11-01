@@ -1,6 +1,7 @@
 {
     "backgroundColor": "black",
     "foreground": [
+        "robot",
         "ground",
         "water",
         "doubleJump",
@@ -21,6 +22,8 @@
         "app.cleancode.powerUp.Jacket",
         "app.cleancode.player.PlayerPowerUpCollector",
         "app.cleancode.platform.PlatformPowerUpCreator",
-        "app.cleancode.distanceText.DistanceTextUpdater"
+        "app.cleancode.distanceText.DistanceTextUpdater",
+        "app.cleancode.robot.RobotMover",
+        "app.cleancode.robot.RobotPlatformCollector"
     ]
 }

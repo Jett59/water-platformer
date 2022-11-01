@@ -1,0 +1,12 @@
+{
+    "name": "robot",
+    "type": "RECTANGLE",
+    "collidable": false,
+    "width": 0.1,
+    "height": 0.1,
+    "x": -100,
+    "y": -100,
+    "properties": [
+        "platforms"
+    ]
+}
