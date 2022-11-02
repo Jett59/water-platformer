@@ -22,7 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class GameStart extends Application {
-  private static PhysicalLaw[] laws = new PhysicalLaw[] {new Gravity(), new Drag(), new Movement()};
+  private static PhysicalLaw[] laws = new PhysicalLaw[] {new Gravity(), new Movement(), new Drag()};
 
   public static void begin(String[] args) {
     launch(args);

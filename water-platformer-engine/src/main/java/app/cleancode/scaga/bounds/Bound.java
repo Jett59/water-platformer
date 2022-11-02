@@ -51,4 +51,9 @@ public class Bound {
   public double getMaxRadius() {
     return maxRadius;
   }
+  
+  @Override
+  public String toString() {
+    return "[%f, %f, %f, %f]".formatted(minX, minY, width, height);
+  }
 }

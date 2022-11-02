@@ -85,20 +85,24 @@ public class RobotMover extends GameListener {
         platformsList.remove(targetPlatform);
         targetPlatform = null;
       }
+      Bound playerBound = player.getRegion().getTransformedBound();
       /**
-       * Half the (velocity * mass) is the total height of the jump due to gravity.
-       * 
-       * Let x = the average velocity. Since the velocity decreases linearly, the average velocity
-       * from v -> 0 will be equal to v/2. That is as far as I could get with maths. It turns out
-       * (via testing) that the formula is vx/m, where m is the mass.
+       * Predict how high the player will get after the jump. Let x = the average velocity. Since
+       * the velocity decreases linearly, the average velocity from v -> 0 will be equal to v/2.
+       * That is as far as I could get with maths. It turns out (via testing) that the formula is
+       * vx/m, where m is the mass. This is the same as v^2/2m.
        * 
        * Also note that this formula gives the value if there were an infinite number of frames per
        * second. Unfortunately computers aren't that powerful yet and the actual height is slightly
-       * above that.
+       * higher than our prediction.
+       * 
+       * We use the max y because that is the furthest from the platform and if we can't get our
+       * feet on it, we can't get the rest of us on it.
        */
+      double adjustedPlayerMaxY = playerBound.getMaxY() / state.getScreenHeight();
       double predictedMaxPlayerJumpY = player.yVelocity < 0
-          ? player.getY() - player.yVelocity * (player.yVelocity / 2) / player.mass
-          : player.getY();
+          ? adjustedPlayerMaxY - (player.yVelocity * player.yVelocity) / (2 * player.mass)
+          : adjustedPlayerMaxY;
       // Check if the next highest platform is within our reach. If not, target the one below us so
       // we don't fall too far.
       var nearestPlatforms = findNearestPlatform(player.getY());
@@ -113,7 +117,6 @@ public class RobotMover extends GameListener {
         isJumping = true;
       }
       Bound targetPlatformBound = targetPlatform.getRegion().getTransformedBound();
-      Bound playerBound = player.getRegion().getTransformedBound();
       // Start with a simple "which way is the closest to the platform".
       boolean shouldMoveLeft = playerBound.getCenterX() > targetPlatformBound.getCenterX();
       // But get more complicated to allow for platforms on top of each other.
@@ -143,7 +146,9 @@ public class RobotMover extends GameListener {
           }
         }
       }
+      double playerMinX = playerBound.getMinX();
       double playerCenterX = playerBound.getCenterX();
+      double playerMaxX = playerBound.getMaxX();
       double platformMinX = targetPlatformBound.getMinX();
       double platformCenterX = targetPlatformBound.getCenterX();
       double platformMaxX = targetPlatformBound.getMaxX();
@@ -159,8 +164,9 @@ public class RobotMover extends GameListener {
           shouldMoveLeft = true;
         }
       }
+      // Make sure the player is at least a few pixels in from the platform.
       boolean shouldStopMoving =
-          platformBelowPlayer && playerCenterX > platformMinX && playerCenterX < platformMaxX;
+          platformBelowPlayer && playerMaxX - 10 > platformMinX && playerMinX + 10 < platformMaxX;
       if (shouldStopMoving) {
         robot.keyRelease(KeyEvent.VK_LEFT);
         robot.keyRelease(KeyEvent.VK_RIGHT);

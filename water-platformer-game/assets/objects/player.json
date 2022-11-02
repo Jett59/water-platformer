@@ -6,7 +6,7 @@
     "x": 0.5,
     "y": 0.75,
     "mass": 1,
-    "drag": 15,
+    "drag": 100,
     "properties": [
         "isWearingJacket",
         "isDead"
